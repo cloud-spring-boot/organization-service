@@ -166,6 +166,13 @@
             <artifactId>spring-security-rsa</artifactId>
         </dependency>
 
+        <!-- custom dependencies -->
+        <dependency>
+            <groupId>com.max</groupId>
+            <artifactId>correlation-id-lib</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
