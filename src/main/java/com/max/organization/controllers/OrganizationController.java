@@ -1,6 +1,5 @@
 package com.max.organization.controllers;
 
-import com.max.correlation.UserContextHolder;
 import com.max.organization.dto.OrganizationDto;
 import com.max.organization.service.OrganizationService;
 import org.slf4j.Logger;
@@ -31,7 +30,7 @@ public class OrganizationController {
     @RequestMapping(value = "/{organizationId}", method = RequestMethod.GET)
     public ResponseEntity<OrganizationDto> getOrganizationById(@PathVariable("organizationId") String organizationId) {
 
-        LOG.info("Correlation-id: {}", UserContextHolder.getUserContext().getCorrelationId());
+        LOG.info("getOrganizationById called");
 
         if (organizationId == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
