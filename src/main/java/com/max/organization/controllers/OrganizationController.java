@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 @PreAuthorize("hasRole('ROLE_ADMIN')")
+//@PreAuthorize("#oauth2.hasScope('web')")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RestController
 @RequestMapping(value = "v1/organizations/")
