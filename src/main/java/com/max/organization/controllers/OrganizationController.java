@@ -54,6 +54,18 @@ public class OrganizationController {
         return ResponseEntity.status(HttpStatus.OK).body(organizationService.getById(organizationId));
     }
 
+    @RequestMapping(value = "/{organizationId}", method = RequestMethod.DELETE)
+    public ResponseEntity<OrganizationDto> deleteOrganization(@PathVariable("organizationId") String organizationId) {
+
+        boolean wasDeleted = organizationService.deleteById(organizationId);
+
+        if (!wasDeleted) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
     private static void sleep(int timeInSeconds) {
         try {
             TimeUnit.SECONDS.sleep(timeInSeconds);
