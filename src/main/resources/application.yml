@@ -6,13 +6,13 @@ spring:
     stream:
       bindings:
         output:
-            # topic name to publish OrganizationChangeEvent events
-            destination:  orgChangeTopic
-            content-type: application/json
+          # topic name to publish OrganizationChangeEvent events
+          destination:  orgChangeTopic
+          content-type: application/json
       kafka:
         binder:
-          zkNodes: localhost
-          brokers: localhost
+          zkNodes: ${ZK_SERVER_URI:localhost}
+          brokers: ${KAFKA_SERVER_URI:localhost}
 
 eureka:
   instance:
