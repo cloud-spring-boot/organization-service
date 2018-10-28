@@ -1,6 +1,7 @@
 package com.max.organization.controllers;
 
 import com.max.organization.dto.OrganizationDto;
+import com.max.organization.events.OrganizationChangePublisher;
 import com.max.organization.service.OrganizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,7 @@ public class OrganizationController {
     private static final Logger LOG = LoggerFactory.getLogger(OrganizationController.class);
 
     private final OrganizationService organizationService;
+
 
     @Autowired
     public OrganizationController(OrganizationService organizationService) {

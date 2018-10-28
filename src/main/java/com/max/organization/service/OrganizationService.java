@@ -1,6 +1,8 @@
 package com.max.organization.service;
 
 import com.max.organization.dto.OrganizationDto;
+import com.max.organization.events.OrganizationChangePublisher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -19,12 +21,28 @@ public class OrganizationService {
         ALL_ORGANIZATIONS.put("5", new OrganizationDto("5", "Google"));
     }
 
+
+    private final OrganizationChangePublisher organizationChangePublisher;
+
+    @Autowired
+    public OrganizationService(OrganizationChangePublisher organizationChangePublisher) {
+        this.organizationChangePublisher = organizationChangePublisher;
+    }
+
     public OrganizationDto getById(String organizationId) {
         return ALL_ORGANIZATIONS.get(organizationId);
     }
 
-    public boolean deleteById(String organizationId){
-        return ALL_ORGANIZATIONS.remove(organizationId) != null;
+    public boolean deleteById(String organizationId) {
+
+        boolean wasDeleted = ALL_ORGANIZATIONS.remove(organizationId) != null;
+
+        if (wasDeleted) {
+            organizationChangePublisher.publishOrgChange("DELETE", organizationId);
+        }
+
+        return wasDeleted;
+
     }
 
 }

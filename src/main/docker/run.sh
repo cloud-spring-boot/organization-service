@@ -11,6 +11,12 @@ echo "********************************************************"
 while ! `nc -z config-service $CONFIGSERVER_PORT `; do sleep 3; done
 echo ">>>>>>>>>>>> Configuration Server has started"
 
+echo "********************************************************"
+echo "Waiting for the kafka server to start on port  $KAFKA_SERVER_PORT"
+echo "********************************************************"
+while ! `nc -z kafka $KAFKA_SERVER_PORT`; do sleep 10; done
+echo "******* Kafka Server has started"
+
 nohup tcpdump -A -s 0 'tcp port 8080 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)' \
 -w /usr/local/organization-service/pcap/organization-$RANDOM.pcap &
 
@@ -22,4 +28,6 @@ java \
 -Deureka.client.serviceUrl.defaultZone=$EUREKASERVER_URI \
 -Dspring.cloud.config.uri=$CONFIGSERVER_URI \
 -Dspring.profiles.active=$PROFILE \
+-Dspring.cloud.stream.kafka.binder.zkNodes=$KAFKA_SERVER_URI \
+-Dspring.cloud.stream.kafka.binder.brokers=$ZK_SERVER_URI \
 -jar /usr/local/organization-service/@project.build.finalName@.jar
