@@ -4,19 +4,20 @@ import com.max.correlation.UserContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
+@EnableBinding(OutboundOrgChangesCustomChannel.class)
 public class OrganizationChangePublisher {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrganizationChangePublisher.class);
 
-    private final Source source;
+    private final OutboundOrgChangesCustomChannel source;
 
     @Autowired
-    public OrganizationChangePublisher(Source source) {
+    public OrganizationChangePublisher(OutboundOrgChangesCustomChannel source) {
         this.source = source;
     }
 
@@ -29,7 +30,7 @@ public class OrganizationChangePublisher {
                 orgId,
                 UserContextHolder.getUserContext().getCorrelationId());
 
-        source.output().send(MessageBuilder.withPayload(change).build());
+        source.orgChannel().send(MessageBuilder.withPayload(change).build());
     }
 
 }
