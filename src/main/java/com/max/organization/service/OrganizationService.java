@@ -33,7 +33,7 @@ public class OrganizationService {
         return ALL_ORGANIZATIONS.get(organizationId);
     }
 
-    public boolean deleteById(String organizationId) {
+    public boolean delete(String organizationId) {
 
         boolean wasDeleted = ALL_ORGANIZATIONS.remove(organizationId) != null;
 
@@ -42,7 +42,17 @@ public class OrganizationService {
         }
 
         return wasDeleted;
+    }
 
+    public boolean add(String orgId, OrganizationDto organizationDto) {
+
+        if (ALL_ORGANIZATIONS.containsKey(orgId)) {
+            return false;
+        }
+
+        ALL_ORGANIZATIONS.put(orgId, organizationDto);
+
+        return true;
     }
 
 }
