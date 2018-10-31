@@ -30,4 +30,6 @@ java \
 -Dspring.profiles.active=$PROFILE \
 -Dspring.cloud.stream.kafka.binder.zkNodes=$KAFKA_SERVER_URI \
 -Dspring.cloud.stream.kafka.binder.brokers=$ZK_SERVER_URI \
+-XX:NativeMemoryTracking=summary \
+-Xmx1G \
 -jar /usr/local/organization-service/@project.build.finalName@.jar
