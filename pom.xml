@@ -190,7 +190,7 @@
         </dependency>
 
 
-        <!-- jdk 11+ required dependencies -->
+        <!-- jdk 10+ required dependencies -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>

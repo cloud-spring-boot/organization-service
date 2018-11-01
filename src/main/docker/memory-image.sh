@@ -1,5 +1,2 @@
 #!/bin/bash
-jemalloc/bin/pprof --show_bytes --gif /usr/bin/java jeprof*.out > pcap/app-profiling.gif
-
-
-#jeprof --show_bytes --gif /path/to/jvm/bin/java jeprof*.out > /tmp/app-profiling.gif
+jemalloc/bin/jeprof /usr/bin/java --show_bytes --svg  jeprof*.heap > pcap/organization-profiling.svg
