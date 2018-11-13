@@ -2,7 +2,7 @@ FROM openjdk:10-jre
 MAINTAINER Maksym Stepanenko <stepanenkomaksi@gmail.com>
 
 # Alpine
-# RUN  apk update && apk upgrade && apk add netcat-openbsd && apk add bash && apk add tcpdump apt-utils
+# RUN  apk update && apk upgrade && apk add netcat-openbsd bash tcpdump apt-utils curl
 
 # Debian
 RUN apt-get update
@@ -26,6 +26,8 @@ ADD loop.sh loop.sh
 ADD memory-image.sh memory-image.sh
 
 RUN chmod +x run.sh loop.sh memory-image.sh
+
+HEALTHCHECK --start-period=30s --interval=5s CMD curl http://localhost:8080/health || exit 1
 
 CMD ./run.sh
 # CMD ./loop.sh
