@@ -37,6 +37,10 @@ public class OrganizationController {
     @RequestMapping(value = "/{organizationId}", method = RequestMethod.GET)
     public ResponseEntity<OrganizationDto> getOrganizationById(@PathVariable("organizationId") String organizationId) {
 
+        LOG.info("availableProcessors: " + Runtime.getRuntime().availableProcessors() +
+                         ", java: " + System.getProperty("java.version") +
+                         "<<<============================");
+
         LOG.info("getOrganizationById called");
 
         if (organizationId == null) {

@@ -203,7 +203,6 @@
             <version>1.0.0</version>
         </dependency>
 
-
         <!-- jdk 10+ required dependencies -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
